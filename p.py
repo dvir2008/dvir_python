@@ -1,3 +1,2 @@
 print('hello')
-print('yy')
-print('nn') # דדדד
+print(11%2)
