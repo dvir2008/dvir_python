@@ -37,6 +37,3 @@ def add_one_to_binary(binary_str):
         binary_list.insert(0, '1')
         
     return "".join(binary_list)
-        
-        
-print(add_one_to_binary(mashlim_le_shtaim(desimal_to_binari(5))))
