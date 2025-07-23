@@ -1,4 +1,5 @@
 import re
+
 def password_strength():
     x = input("Enter a password: ")
     points = 0
@@ -6,8 +7,17 @@ def password_strength():
         points += 1
     elif len(x) >= 12:
         points += 2
-    if "12345678" in x or "admin" in x or "password" in x or "11111111" in x: #בדיקת מילים נפוצות כמו1-8 וadmin
-        points -= 2 
+    
+    milim_nefotzot = ["12345678","admin","password","11111111"]
+
+    milim_nefotzot_t_o_f = False
+    for i in range(len(milim_nefotzot)):
+        if x in milim_nefotzot[i]:
+            milim_nefotzot_t_o_f = True
+            break
+    
+    if milim_nefotzot_t_o_f:
+        points -= 2
     
     if bool(re.search(r'[A-Z]', x)):#בדיקת אותיות גדולות
         points += 1
@@ -21,7 +31,7 @@ def password_strength():
     if bool(re.search(r'\W',x)):#בדיקת תווים מיוחדים
         points += 1
     
-    if points <= 0:                                   #בדיקת חוזק הסיסמה
+    if points <= 0: #בדיקת חוזק הסיסמה
         return "Weak password"
     
     elif points >= 1 and points <= 3:
@@ -29,5 +39,4 @@ def password_strength():
     
     return "Strong password"
 
-print(password_strength())         
-            
+print(password_strength())
