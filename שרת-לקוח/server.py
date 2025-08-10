@@ -19,19 +19,16 @@ while True:
     print(f"Got a connection from {address}")
 
     try:
-        # שלב 1: השרת שולח ללקוח הודעה לבחור פקודה
         connection.sendall(b"Choose a command: UPLOAD or DOWNLOAD")
         command = connection.recv(1024).decode().strip()
         print(f"Received command: {command}")
 
         if command == "UPLOAD":
-            # שלב 2: השרת מבקש מהלקוח את שם הקובץ
             connection.sendall(b"Enter file name:")
             file_name_bytes = connection.recv(1024)
             file_name = file_name_bytes.decode().strip()
             print(f"Receiving file: {file_name}")
 
-            # שלב 3: השרת מקבל את תוכן הקובץ
             file_path = os.path.join(upload_folder, file_name)
             with open(file_path, 'wb') as f:
                 while True:
@@ -42,13 +39,11 @@ while True:
             print(f"File '{file_name}' saved successfully.")
 
         elif command == "DOWNLOAD":
-            # שלב 2: השרת מבקש מהלקוח את שם הקובץ
             connection.sendall(b"Enter file name:")
             file_name = connection.recv(1024).decode().strip()
             file_path = os.path.join(upload_folder, file_name)
             
             if os.path.exists(file_path):
-                # שלב 3: השרת שולח את תוכן הקובץ ללקוח
                 with open(file_path, 'rb') as f:
                     while True:
                         chunk = f.read(1024)
