@@ -10,7 +10,7 @@ def get_mac(ip):
     if uns:
         return uns[0][1].src
     return None
-
+f
 defult_getway = "192.168.1.1"
 target_ip = "192.168.1.108"
 
